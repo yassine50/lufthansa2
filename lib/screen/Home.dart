@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 import 'package:lufthansa/screen/List_blades.dart';
 
 class Home extends StatefulWidget {
@@ -11,29 +14,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  File? selected_image ; 
   void pickUploadProfilePic() async {
     final image = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
+      source: ImageSource.camera,
     );
-      //print(image?.path);
-      // bool verif = await storage.Upload_File(
-      //     image!.path, Account().accountID + "/profilepic.jpg");
-      // if (verif) {
-      //   fb.Update_Data('/Accounts/' + Tools.Cast_email(Account().accountID),
-      //       {'profile_pic': true});
-      //   Account().profile_pic =
-      //   await storage.Get_file(Account().accountID + "/profilepic.jpg");
-      //   Get.back();
-      //   Popups_Manger().aut_profile(context);
-      //   setState(() {
-      //     Account().profile_pic = Account().profile_pic;
-      //   });
-      // } else {
-      //   Get.back();
-      //   Popups_Manger().warningPopup(
-      //       context, AppLocalizations.of(context)!.image_not_upload);
-      // }
-
+   selected_image = File(image!.path);
+   // replace the "uri" with your adress
+   String uri = '' ;
+ final request =   http.MultipartRequest("POST",Uri.parse(uri));
+ final headers = { "Content-type": "multipart/form-data"};
+ // replace field with your api key
+    String field  ="" ;
+ request.files.add(
+   http.MultipartFile(field, selected_image!.readAsBytes().asStream(), selected_image!.lengthSync(), filename: selected_image!.path.split("/").last),
+ );
+    request.headers.addAll(headers);
+    final response = await request.send();
+    // if you want you can get the response from the server but i don't think it's the case for us
+    // cuz we are going to save the data in the firebase from the server so we don't need response
   }
   @override
   Widget build(BuildContext context) {

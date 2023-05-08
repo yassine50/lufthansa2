@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import '../Backend_class/FB_Auth.dart';
 import 'change_name.dart';
 import 'change_pass.dart';
+import 'login.dart';
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -148,10 +150,10 @@ class _ProfileState extends State<Profile> {
           ],),
           GestureDetector(
             onTap: (){
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const Nav_bar()),
-              // );
+              FB_Auth().logout() ;
+              Navigator
+                  .of(context)
+                  .pushReplacement(new MaterialPageRoute(builder: (BuildContext context) => Loginpage()));
             },
             child: Container(
               decoration: BoxDecoration(

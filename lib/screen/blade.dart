@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import '../Backend_class/FB_RDB.dart';
 import '../Backend_class/selected_blade.dart';
 class Blade extends StatefulWidget {
   const Blade({Key? key}) : super(key: key);
@@ -9,10 +10,34 @@ class Blade extends StatefulWidget {
 }
 
 class _BladeState extends State<Blade> {
+    final port_num = TextEditingController();
+  final serial_num = TextEditingController();
+  final AXL = TextEditingController();
+  final RAD = TextEditingController();
+  final TAN = TextEditingController();
+  final VRS = TextEditingController();
+  final MFR = TextEditingController();
+  final TIP = TextEditingController();
+  final DMF = TextEditingController();
+  final repair = TextEditingController();
+  final commentes = TextEditingController();
+    FB_RBD fb = FB_RBD();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    port_num.text = selected_blade.selected.port_number ;
+    serial_num.text = selected_blade.selected.serial_number ;
+    AXL.text = selected_blade.selected.AXL ;
+    RAD.text = selected_blade.selected.RAD ;
+    TAN.text = selected_blade.selected.TAN ;
+    VRS.text = selected_blade.selected.VRS ;
+    MFR.text = selected_blade.selected.MFR ;
+    TIP.text = selected_blade.selected.TIP ;
+    DMF.text = selected_blade.selected.DMF ;
+    repair.text = selected_blade.selected.Marking ;
+    commentes.text = selected_blade.selected.Comments ;
+
   }
   @override
   Widget build(BuildContext context) {
@@ -21,29 +46,10 @@ class _BladeState extends State<Blade> {
         backgroundColor: Colors.white,
     resizeToAvoidBottomInset: true,
     body: SingleChildScrollView(child:  Stack(children: [
-      // Column(
-      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //   children: [
-      //     Container(
-      //       width: MediaQuery.of(context).size.width,
-      //       height: 200,
-      //     ),
-      //     Container(
-      //       // color: Colors.amber,
-      //       alignment: Alignment.bottomRight,
-      //       width: MediaQuery.of(context).size.width,
-      //       height: size.height*0.25,
-      //       child: Image.asset(
-      //         'assets/images/zina.png',
-      //         width: 250,
-      //         height: 250,
-      //         fit: BoxFit.contain,
-      //       ),
-      //     ),
-      //   ],),
       Container(
         margin: EdgeInsets.only(top: size.height*0.06, left: size.width*0.05, right: size.width*0.05),
-        child: Column(
+        child:
+        Column(
           children: [
             AutoSizeText(
               selected_blade.selected.title,
@@ -92,7 +98,7 @@ class _BladeState extends State<Blade> {
               margin: EdgeInsets.only(
                   right: size.width * 0.05, left: size.width * 0.05, top: 20),
               child: TextFormField(
-                //  controller: _model.emailTextController,
+                  controller:port_num,
                 obscureText: false,
                 decoration: InputDecoration(
                   labelText: 'Port Number',
@@ -136,7 +142,7 @@ class _BladeState extends State<Blade> {
               margin: EdgeInsets.only(
                   right: size.width * 0.05, left: size.width * 0.05, top: 20),
               child: TextFormField(
-                //  controller: _model.emailTextController,
+                  controller: serial_num,
                 obscureText: false,
                 decoration: InputDecoration(
                   labelText: 'Serial Number',
@@ -200,7 +206,7 @@ class _BladeState extends State<Blade> {
                   Container(
                     width: size.width*0.25,
                     child: TextFormField(
-                      //  controller: _model.emailTextController,
+                        controller: AXL,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'AXL',
@@ -244,7 +250,7 @@ class _BladeState extends State<Blade> {
                   Container(
                     width: size.width*0.25,
                     child: TextFormField(
-                      //  controller: _model.emailTextController,
+                        controller: RAD,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'RAD',
@@ -288,7 +294,7 @@ class _BladeState extends State<Blade> {
                   Container(
                     width: size.width*0.25,
                     child: TextFormField(
-                      //  controller: _model.emailTextController,
+                        controller: TAN,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'TAN',
@@ -355,7 +361,7 @@ class _BladeState extends State<Blade> {
                   Container(
                     width: size.width*0.35,
                     child: TextFormField(
-                      //  controller: _model.emailTextController,
+                        controller: VRS,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'VRS',
@@ -399,7 +405,7 @@ class _BladeState extends State<Blade> {
                   Container(
                     width: size.width*0.35,
                     child: TextFormField(
-                      //  controller: _model.emailTextController,
+                       controller: MFR,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'MFR',
@@ -451,7 +457,7 @@ class _BladeState extends State<Blade> {
                   Container(
                     width: size.width*0.35,
                     child: TextFormField(
-                      //  controller: _model.emailTextController,
+                        controller:TIP,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'TIP',
@@ -495,7 +501,7 @@ class _BladeState extends State<Blade> {
                   Container(
                     width: size.width*0.35,
                     child: TextFormField(
-                      //  controller: _model.emailTextController,
+                        controller: DMF,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'DMF',
@@ -542,7 +548,7 @@ class _BladeState extends State<Blade> {
              margin: EdgeInsets.only(
                  right: size.width * 0.05, left: size.width * 0.05, top: 20),
       child: TextFormField(
-    //    controller: _model.shortBioController1,
+        controller:repair,
         obscureText: false,
         decoration: InputDecoration(
           hintText: 'Repair Markings\n\n',
@@ -589,7 +595,7 @@ class _BladeState extends State<Blade> {
               margin: EdgeInsets.only(
                   right: size.width * 0.05, left: size.width * 0.05, top: 20),
               child: TextFormField(
-                //    controller: _model.shortBioController1,
+                    controller: commentes,
                 obscureText: false,
                 decoration: InputDecoration(
                   hintText: 'Comments\n\n',
@@ -632,38 +638,83 @@ class _BladeState extends State<Blade> {
                 // validator: _model.shortBioController1Validator.asValidator(context),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: 7),
-              child: GestureDetector(
-                onTap: (){
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => const Home()),
-                  // );
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  child: AutoSizeText(
-                    "Update Info",
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0,
-                        color: Colors.white
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 7),
+                child: GestureDetector(
+                  onTap: (){
+                    fb.Delete_Data('/blades/${selected_blade.selected.id}');
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: AutoSizeText(
+                      "Delete",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0,
+                          color: Colors.white
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  height: size.height*0.06,
-                  width:size.width*0.5,
-                  margin: EdgeInsets.only(bottom: 10, top: 10),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF4A8CFF),
-                    borderRadius: BorderRadius.circular(10),
+                    height: size.height*0.06,
+                    width:size.width*0.3,
+                    margin: EdgeInsets.only(bottom: 10, top: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ),
-            ),
+              Container(
+                margin: EdgeInsets.only(bottom: 7),
+                child: GestureDetector(
+                  onTap: (){
+                    fb.Update_Data("/blades/${selected_blade.selected.id}", {
+                      "AXL":AXL.text ,
+                      "Comments"  : commentes.text ,
+                      "DMF" :DMF.text,
+                      "MFR" : MFR.text ,
+                      "Marking" :repair.text,
+                      "RAD" : RAD.text ,
+                      "TAN": TAN.text ,
+                      "TIP" : TIP.text ,
+                      "VRS" :VRS.text ,
+                      "port_number" :port_num.text ,
+                      "serial_number" : serial_num.text ,
+                    });
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: AutoSizeText(
+                      "Update Info",
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0,
+                          color: Colors.white
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    height: size.height*0.06,
+                    width:size.width*0.3,
+                    margin: EdgeInsets.only(bottom: 10, top: 10),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF4A8CFF),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+            ],)
+
 
 
 
